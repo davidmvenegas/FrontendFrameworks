@@ -16,7 +16,38 @@
     </form>
 
     <script>
-        
+        const form = document.querySelector('form')
+        const input = document.querySelector('[name="todo"]')
+        const todoList = document.getElementById('todos')
+
+        const existingTodos = JSON.parse(localStorage.getItem('todos'))
+        const todoData = existingTodos || []
+
+        window.onload = () => {
+            todoData.forEach(todo => {
+                setExistingTodos(todo)
+            })
+
+            function setExistingTodos(text) {
+                const li = document.createElement('li')
+                li.innerHTML = text
+                todoList.appendChild(li)
+            }
+        }
+
+        function addNewTodo(text) {
+            todoData.push(text)
+            const li = document.createElement('li')
+            li.innerHTML = text
+            todoList.appendChild(li)
+            localStorage.setItem('todos', JSON.stringify(todoData))
+            input.value = ''
+        }
+
+        form.onsubmit = (e) => {
+            e.preventDefault()
+            addNewTodo(input.value)
+        }
 
     </script>
 
