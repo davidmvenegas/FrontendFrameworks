@@ -18,7 +18,6 @@ export class AppComponent {
   addTodo() {
     this.todos.push(this.todoText);
     localStorage.setItem('todos', JSON.stringify(this.todos));
-    
   }
 
 }
